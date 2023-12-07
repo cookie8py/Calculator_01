@@ -1,0 +1,127 @@
+import math # math library
+
+def checkSide(angle):
+   #SIDE...
+  side = input(" The angle is " + str(angle) + ", \n\nEnter the length of the side : ")
+
+
+  while not side.replace('.', '', 1).isdigit():
+  # while not side.isdigit():
+    print('Thats not a number, try again please')
+    side = input("\nEnter the length of the side : ")
+
+  # finish defining side...
+  side = round(float(side), 2)  # rounding the side to 2 decimal places.
+  print(" The length of side is " + str(side) + ".")  # printing the side
+
+  return side
+
+
+def checkLocation():
+  #LOCATION...
+  # Asking for the location of the side
+  location = input("\nEnter the number of the location of the side [1] <=base [2] <=hypotenuse [3] <=height : ")
+
+  # and for the weenies that aren't playing by the rules...
+  while location != "1" and location != "2" and location != "3":
+    print("Invalid Input")  # printing invalid input
+    location = input("\nEnter the number of the location of the side [1] <=base [2] <=hypotenuse [3] <=height : ")  # Asking for the location of the side
+
+  return int(location)
+
+
+def triangle(angle):
+  match(angle):
+    case 30:  # if the angle is 30
+      side = checkSide(angle)
+
+      location = checkLocation()
+
+      # Do something with the location...
+      if location == 1:  # if the location is 1
+        base = round(side, 2)  # rounding the base to 2 decimal places
+        height = round(side / (math.sqrt(3)), 2) # rounding the height to 2 decimal places after taking the square root of 3
+        hypotenuse = round(side / (math.sqrt(3)) * 2, 2) # rounding the hypotenuse to 2 decimal places after taking the square root of 3 and mulitplying it by 2
+
+      elif location == 2:  # if the location is 2
+        base = round(side / 2 * (math.sqrt(3)), 2) # rounding the base to 2 decimal places after taking the square root of 3
+        height = round(side / 2, 2) # rounding the height to 2 decimal places after divisible by 2
+        hypotenuse = round(side, 2)  # rounding the hypotenuse to 2 decimal places
+
+      elif location == 3:  # if the location is 3
+        base = round(side * (math.sqrt(3)), 2) # rounding the base to 2 decimal places after taking the square root of 3
+        height = round(side, 2)  # rounding the height to 2 decimal places
+        hypotenuse = round(side * 2, 2) # rounding the hypotenuse to 2 decimal places after multipling the side by 2
+
+      printResults(base, height, hypotenuse)
+      #.............................................END 30.............................................
+
+
+    case 45: # if the angle is 45
+      side = checkSide(angle)
+
+      location = checkLocation()
+
+      if location == 1:  # if the location is 1
+        base = round(side, 2)
+        height = base
+        hypotenuse = round(side * (math.sqrt(2)), 2)
+
+      elif location == 2:  # if the location is 2
+        base = round(side / (math.sqrt(2)), 2)
+        height = base
+        hypotenuse = round(side, 2)
+
+      elif location == 3:  # if the location is 3
+        base = round(side, 2)
+        height = base
+        hypotenuse = round(side * (math.sqrt(2)), 2)
+
+      printResults(base, height, hypotenuse)
+      #.............................................END 45.............................................
+
+
+
+    case 60: # if the angle is 60
+      side = checkSide(angle)
+
+      location = checkLocation()
+
+      if location == 1:  # if the location is 1
+        base = round(side, 2)
+        height = round(side * math.sqrt(3), 2)
+        hypotenuse = round(side * 2, 2)
+
+      elif location == 2:  # if the location is 2
+        base = round(side / 2, 2)
+        height = round(side * math.sqrt(3) / 2, 2)
+        hypotenuse = round(side, 2)
+
+      elif location == 3:  # if the location is 3
+        base = round(side / math.sqrt(3), 2)
+        height = round(side, 2)
+        hypotenuse = round(side * 2 / math.sqrt(3), 2)
+
+      printResults(base, height, hypotenuse)
+      #.............................................END 60.............................................
+
+
+def printResults(base, height, hypotenuse):
+  print(" The base is " + str(base) + ", \n The height is " + str(height) + " and \n The hypotenuse is " + str(hypotenuse))  # printing the base, height and hypotenuse
+  exit()  # exiting the program
+
+
+def reqStart():
+  angle = input("Enter the angle in 30 / 45 / 60 : ")
+  validStart(angle)
+
+
+def validStart(angle):
+  if angle == "30" or angle == "45" or angle == "60":
+    # return int(angle)
+    triangle(int(angle))
+  else:
+      print('Please enter 30, 45, or 60')
+      reqStart()
+
+reqStart()
